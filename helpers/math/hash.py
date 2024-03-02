@@ -1,6 +1,6 @@
 from random import randint
 
-from prime import prime_generator
+from helpers.math.prime import prime_generator
 
 MOD_PRIME = 23
 

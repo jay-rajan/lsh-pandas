@@ -1,8 +1,8 @@
 import sys
 from typing import Set
 import pandas
-from strings.string_utilities import ngrams_set
-from types import Vector
+from helpers.strings.string_utilities import ngrams_set
+from lsh_types import Vector
 
 
 def create_signature(
