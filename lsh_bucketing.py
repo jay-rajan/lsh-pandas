@@ -1,10 +1,11 @@
 from typing import List, Set
 
 import pandas as pd
+
+from steps.create_buckets import get_buckets
+from steps.create_signatures import create_signature
 from strings.string_utilities import ngrams_set
 from math.hash import get_hash_functions
-from steps.step_2_create_signatures import create_signature
-from steps.step_3_create_buckets import get_buckets
 
 
 def create_ngrams(df: pd.DataFrame, column_names: List[str], ngrams_size: int):
