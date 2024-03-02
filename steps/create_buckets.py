@@ -15,7 +15,7 @@ def get_hash_collisions_from_signatures_for_band(
         start_index = band_size * band_no
         end_index = start_index + band_size - 1
         # hash such that the value of the tuple can be compared against other in O(1)
-        signature = row[signature_column_name].split(",")
+        signature = row[signature_column_name]
         hash_val = hash(tuple(signature[start_index:end_index]))
         if hash_val not in hashes:
             hashes[hash_val] = set()

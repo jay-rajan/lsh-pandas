@@ -62,6 +62,6 @@ def apply_signature(
                     hash_function = hash_functions[hash_index]
                     hash_val = hash_function(row + 1)
                     signature[hash_index] = min(hash_val, signature[hash_index])
-        return ",".join(str(v) for v in signature)
+        return signature
 
     return inner
