@@ -38,20 +38,14 @@ def assign_buckets(
     Returns: the original dataframe with the bucket_id field added to it
 
     """
-    the_universal_set = create_ngrams(df, hash_columns, ngrams_size)
 
-    hash_functions = get_hash_functions(len(the_universal_set), signature_size)
-
-    column_names = ",".join(hash_columns)
     signature_column_name = "signature"
-    df = create_signature(
-        the_universal_set=the_universal_set,
-        companies=df,
-        column_names_for_signature=column_names,
-        hash_functions=hash_functions,
-        signature_column_name_output=signature_column_name,
-        selected_ngrams_size=ngrams_size,
-        selected_signature_size=signature_size,
+    assign_signatures(
+        df=df,
+        hash_columns=hash_columns,
+        ngrams_size=ngrams_size,
+        signature_size=signature_size,
+        signature_column_name=signature_column_name,
     )
 
     bucket_df = get_buckets(
@@ -62,3 +56,36 @@ def assign_buckets(
         column_names=df.columns.tolist(),
     )
     return bucket_df
+
+
+def assign_signatures(
+        df: pd.DataFrame,
+        hash_columns: list,
+        ngrams_size: int = 2,
+        signature_size: int = 100,
+        signature_column_name: str = "signature",
+) -> pd.DataFrame:
+    """
+    Assigns signatures to the dataframe in the column signature_column_name
+    Args:
+        df (pd.DataFrame): the dataframe in question
+        hash_columns (list): column names to be used for lsh algorithm
+        ngrams_size (int): size of the ngrams(defaults to 2)
+        signature_size (int): size of the signature(defaults to 100)
+        signature_column_name (str): name of the column to store the signature
+    """
+    the_universal_set = create_ngrams(df, hash_columns, ngrams_size)
+
+    hash_functions = get_hash_functions(len(the_universal_set), signature_size)
+
+    column_names = ",".join(hash_columns)
+    df = create_signature(
+        the_universal_set=the_universal_set,
+        companies=df,
+        column_names_for_signature=column_names,
+        hash_functions=hash_functions,
+        signature_column_name_output=signature_column_name,
+        selected_ngrams_size=ngrams_size,
+        selected_signature_size=signature_size,
+    )
+    return df

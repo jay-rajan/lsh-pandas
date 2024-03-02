@@ -1,6 +1,6 @@
 import pandas as pd
 
-from lsh_bucketing import assign_buckets
+from lsh import assign_buckets
 
 
 def create_test_df() -> pd.DataFrame:
